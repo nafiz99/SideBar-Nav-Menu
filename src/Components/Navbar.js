@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
-import {IoIosMenu} from "react-icons/io";
-import {AiOutlineCloseCircle} from "react-icons/ai";
+import * as IoIcons from "react-icons/io";
+import * as AiIcons from "react-icons/ai";
 import {Link} from 'react-router-dom';
+import {SideBarData} from './SideBarData'
 
 
 function Navbar() {
@@ -12,15 +13,25 @@ function Navbar() {
        <>
        <div className="navbar">
            <Link to="#" className='menu-bars'></Link>
-           <IoIosMenu onClick={showSideBar}/>
+           <IoIcons.IoIosMenu onClick={showSideBar}/>
        </div>
        <nav className={sidebar?'nav-menu-active':'nav-menu'}>
            <ul className='nav-menu-items'>
                <li className='nav-bar-toggle'>
                    <Link to='#' className='menu-bars'>
-                       <AiOutlineCloseCircle/>
+                       <AiIcons.AiOutlineCloseCircle/>
 
                    </Link>
+                   {SideBarData.map((item,index)=>{
+                       return (
+                           <li key={index} className={item.cName}>
+                               <Link to={item.path}>
+                                   {item.icon}
+                                   <span>{item.title}</span>
+                               </Link>
+                           </li>
+                       )
+                   })}
                </li>
            </ul>
        </nav>
